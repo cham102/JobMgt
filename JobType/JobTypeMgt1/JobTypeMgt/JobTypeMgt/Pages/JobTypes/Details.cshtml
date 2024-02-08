@@ -1,0 +1,181 @@
+﻿@page
+@model JobTypeMgt.Pages.JobTypes.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    /* Custom styles */
+    body {
+        background-color: #333;
+        color: white;
+    }
+
+</style>
+<h1>Job Type Details</h1>
+
+<div>
+
+    <hr />
+    <div class="row">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label asp-for="JobTypeHed.JobTypecode" class="control-label">Job Type Code:</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input asp-for="JobTypeHed.JobTypecode" class="form-control" disabled/>
+                        <span asp-validation-for="JobTypeHed.JobTypecode" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label asp-for="JobTypeHed.JobTypPrefix" class="control-label">Job Type Prefix:</label><span style="color:red">*</span>
+                    </div>
+                    <div class="col-md-4">
+                        <input asp-for="JobTypeHed.JobTypPrefix" class="form-control" disabled/>
+                        <span asp-validation-for="JobTypeHed.JobTypPrefix" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label asp-for="JobTypeHed.JobTypeDescription" class="control-label">Description:</label><span style="color:red">*</span>
+                    </div>
+                    <div class="col-md-10">
+                        <input asp-for="JobTypeHed.JobTypeDescription" class="form-control" disabled/>
+                        <span asp-validation-for="JobTypeHed.JobTypeDescription" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+
+                        <input asp-for="JobTypeHed.JobTypActive" type="checkbox" class="form-check-input" disabled/>
+                        <label asp-for="JobTypeHed.JobTypActive" class="control-label">Is Active</label>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <h5>Milestone Details</h5>
+
+            @if (Model.ErrMsg.Length == 0)
+            {
+                <table class="table table-bordered table-responsive-md table-striped text-center text-white" id="tblMilestone">
+                    <thead>
+                        <tr id="TbRow">
+
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.jobTypeDet.JobTypeMilestone)
+                            </th>
+
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.jobTypeDet.JobTypStatus)
+                            </th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @for (int i = 0; i < Model.JobTypeDetList.Count; i++)
+                        {
+                            <tr id="tblMilestoneRw">
+
+                                <td class="pt-3-half" hidden>
+                                    @Html.HiddenFor(model => model.JobTypeDetList[i].JobTypePk, new { id = "JobTypeHedID" })
+                                </td>
+
+                                <td class="pt-3-half" hidden>
+                                    @Html.HiddenFor(model => model.JobTypeDetList[i].JobTypeDetPk, new { id = "JobTypeDetId" })
+                                </td>
+
+                                <td class="pt-3-half" style="color:white">
+                                    @Html.DisplayFor(model => model.JobTypeDetList[i].JobTypeMilestone)
+                                </td>
+
+                                <td class="pt-3-half" style="color:white">
+                                    @Html.DisplayFor(model => model.JobTypeDetList[i].JobTypStatus)
+                                </td>
+
+
+
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+                </table>
+            } 
+            else
+            {
+            <div class="alert alert-info" role="alert">
+                @Model.ErrMsg
+            </div>
+            }
+
+            
+            <br />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-9"></div>
+                    <div class="col-md-3">
+                        @* <input type="submit" value="Save"  /> *@
+                        <a asp-page="./Edit" asp-route-id="@Model.JobTypeHed?.JobTypePk" class="btn btn-success">Edit</a>
+                        <a asp-page="./Index" class="btn btn-info">Back to List</a>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </form>
+        @*  </div> *@
+    </div>
+    @*  <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JobTypeHed.JobTypecode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobTypeHed.JobTypecode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JobTypeHed.JobTypeDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobTypeHed.JobTypeDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JobTypeHed.JobTypPrefix)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobTypeHed.JobTypPrefix)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JobTypeHed.JobTypActive)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobTypeHed.JobTypActive)
+        </dd>
+    </dl> *@
+</div>
+

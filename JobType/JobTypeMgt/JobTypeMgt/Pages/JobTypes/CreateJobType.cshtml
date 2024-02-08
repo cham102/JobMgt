@@ -1,0 +1,57 @@
+﻿@page
+@model JobTypeMgt.Pages.JobTypes.CreateJobTypeModel
+@{
+}
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="JobType.JobTypecode" class="control-label"></label>
+        <input asp-for="JobType.JobTypecode" class="form-control" />
+        <span asp-validation-for="JobType.JobTypecode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="JobType.JobTypeDescription" class="control-label"></label>
+        <input asp-for="JobType.JobTypeDescription" class="form-control" />
+        <span asp-validation-for="JobType.JobTypeDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="JobType.JobTypPrefix" class="control-label"></label>
+        <input asp-for="JobType.JobTypPrefix" class="form-control" />
+        <span asp-validation-for="JobType.JobTypPrefix" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="JobType.JobTypActive" class="control-label"></label>
+        <div class="form-check">
+            <input asp-for="JobType.JobTypActive" class="form-check-input" />
+            <label class="form-check-label" asp-for="JobType.JobTypActive">Active</label>
+        </div>
+        <span asp-validation-for="JobType.JobTypActive" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="JobTypeDet.JobTypeMilestone" class="control-label"></label>
+        <select asp-for="JobTypeDet.JobTypeMilestone" class="form-control">
+            <option value="Option1">Option 1</option>
+            <option value="Option2">Option 2</option>
+        </select>
+        <span asp-validation-for="JobTypeDet.JobTypeMilestone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="JobTypeDet.JobTypeMilestone" class="control-label"></label>
+        <select asp-for="JobTypeDet.JobTypeMilestone" class="form-control">
+            <option value="Option1">Option 1</option>
+            <option value="Option2">Option 2</option>
+        </select>
+        <span asp-validation-for="JobTypeDet.JobTypeMilestone" class="text-danger"></span>
+    </div>
+   
+    @*    <div class="form-group">
+    <label asp-for="student.Status" class="control-label"></label>
+    <input asp-for="student.Status" class="form-control" />
+    <span asp-validation-for="student.Status" class="text-danger"></span>
+    </div> *@
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>

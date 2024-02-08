@@ -1,0 +1,212 @@
+﻿@page
+@model JobTypeMgt.Pages.JobTypes.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+@* //2023/12/13 *@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+<style>
+    /* Custom styles */
+    .pt-3-half {
+        padding-top: 1.4rem;
+    }
+    body {
+        background-color: #333;
+        color: white; 
+    }
+
+    .form-control {
+        background-color: #ff6b6b;
+        color: white;
+    }
+
+    .pt-3-half {
+        padding-top: 1.4rem;
+    }
+    
+</style>
+
+<h4>New Job Type</h4>
+
+
+
+<hr />
+<div class="row">
+    @* <div class="col-md-4"> *@
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="row">
+                <div class="col-md-2">
+                <label asp-for="JobTypeHeds.JobTypecode" class="control-label">Job Type Code:</label>
+                </div>
+               <div class="col-md-4">
+                <input asp-for="JobTypeHeds.JobTypecode" class="form-control" />
+                <span asp-validation-for="JobTypeHeds.JobTypecode" class="text-danger"></span>
+                </div>
+            </div>
+                
+            </div>
+        
+         <br>           
+        
+            <div class="form-group">
+               <div class="row">
+                <div class="col-md-2">
+                <label asp-for="JobTypeHeds.JobTypPrefix" class="control-label">Job Type Prefix:</label><span style="color:red">*</span>
+                </div>
+                <div class="col-md-4">
+                <input asp-for="JobTypeHeds.JobTypPrefix" class="form-control" />
+                <span asp-validation-for="JobTypeHeds.JobTypPrefix" class="text-danger"></span>
+                </div>
+                </div>
+            </div>
+
+        <br>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <label asp-for="JobTypeHeds.JobTypeDescription" class="control-label">Description:</label><span style="color:red">*</span>
+                </div>
+                <div class="col-md-10">
+                    <input asp-for="JobTypeHeds.JobTypeDescription" class="form-control" />
+                    <span asp-validation-for="JobTypeHeds.JobTypeDescription" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+
+            <div class="form-group">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-3">
+                
+                <input asp-for="JobTypeHeds.JobTypActive" type="checkbox" class="form-check-input" />
+                    <label asp-for="JobTypeHeds.JobTypActive" class="control-label">Is Active</label>
+              @* <span asp-validation-for="JobTypeHeds.JobTypActive" class="text-danger"></span> *@
+                </div>
+             </div>
+            </div>
+
+            <br />
+        <h5>Milestone Details</h5> 
+
+        <!-- Editable table -->
+
+                
+                    <span class="table-add float-right mb-3 mr-2">
+                        <a href="#" class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a>
+                    </span>
+                   <table class="table table-bordered table-responsive-md table-striped text-center text-white" id="tblMilestoneDt">
+                        <thead>
+                            <tr id="TbRow">
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.jobTypeDet.JobTypeMilestone)
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.jobTypeDet.JobTypStatus)
+                                </th>
+                                <th class="text-center">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                      
+                            <tr id="tblMilestoneRw">
+                                <td class="pt-3-half" >
+                                 @Html.EditorFor(model => model.JobTypeDetList[0].JobTypeMilestone)
+                              </td>
+                                <td class="pt-3-half">
+                                 @Html.EditorFor(model => model.JobTypeDetList[0].JobTypStatus)
+                                </td>
+                                <td class="pt-3-half" >
+                                <input type="button" value="Remove" class="btn btn-danger"  />                                 
+                                </td>                            
+                            
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+            
+           
+        <!-- Editable table -->
+
+
+
+        <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                @* <a onclick="addrow()" class="fa fa-plus-circle" href="#"></a> *@
+               
+            </div>
+        </div>
+
+         
+
+
+
+            <br/>
+            <div class="form-group">
+                <div class="row">
+                <div class="col-md-9"></div>
+                <div class="col-md-3">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                    <a asp-page="Index" class="btn btn-info">Back to List</a>
+                </div>
+
+
+            </div>
+           
+            </div>
+        </form>
+   @*  </div> *@
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+        //Index of list
+        var currentIndex = 1;
+
+        //Remove Row
+        $('table').on('click', 'input[type="button"]', function (e) {
+            $(this).closest('tr').remove();
+        });
+
+
+        //Add Row
+        $('.text-success').click(function () {
+
+            var newRow = $("#tblMilestoneRw").html();
+            newRow = newRow.replace(/\[0\]/g, '[' + currentIndex + ']');
+
+            $.ajax({
+                url: this.href,
+                cache: false,
+                success: function () { 
+                    $('.table').append('<tr>' + newRow + '</tr>');
+                    currentIndex++;
+                }
+            });
+            return false;
+        });
+
+
+
+
+       
+       
+
+
+    </script>
+}

@@ -1,0 +1,190 @@
+﻿@page
+@model JobTypeMgt.Pages.JobTypes.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h4>Delete Job Type</h4>
+
+<h5>Are you sure you want to delete this?</h5>
+<div>
+    
+    <hr />
+    
+    <div class="row">       
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="JobTypeHed.JobTypePk" />
+            <input type="hidden" asp-for="jobTypeDet.JobTypeDetPk" />
+            <input type="hidden" asp-for="JobTypeHed.AddUser" />
+            <input type="hidden" asp-for="JobTypeHed.AddDate" />
+            <input type="hidden" asp-for="JobTypeHed.AddMach" />
+            <input type="hidden" asp-for="JobTypeHed.Session" />
+            <input type="hidden" asp-for="JobTypeHed.RecordId" />
+            <input type="hidden" asp-for="JobTypeHed.timestamp_column" />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label asp-for="JobTypeHed.JobTypecode" class="control-label">Job Type Code:</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input asp-for="JobTypeHed.JobTypecode" class="form-control"  disabled/>
+                        <span asp-validation-for="JobTypeHed.JobTypecode" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label asp-for="JobTypeHed.JobTypPrefix" class="control-label">Job Type Prefix:</label><span style="color:red">*</span>
+                    </div>
+                    <div class="col-md-4">
+                        <input asp-for="JobTypeHed.JobTypPrefix" class="form-control" disabled />
+                        <span asp-validation-for="JobTypeHed.JobTypPrefix" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label asp-for="JobTypeHed.JobTypeDescription" class="control-label">Description:</label><span style="color:red">*</span>
+                    </div>
+                    <div class="col-md-10">
+                        <input asp-for="JobTypeHed.JobTypeDescription" class="form-control" disabled/>
+                        <span asp-validation-for="JobTypeHed.JobTypeDescription" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+
+                        <input asp-for="JobTypeHed.JobTypActive" type="checkbox" class="form-check-input" disabled />
+                        <label asp-for="JobTypeHed.JobTypActive" class="control-label">Is Active</label>
+
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <h6>Milestone Details</h6>
+
+            @* <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label asp-for="jobTypeDet.JobTypeMilestone" class="control-label">Milestones</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select asp-for="jobTypeDet.JobTypeMilestone" class="form-control" disabled>
+
+                            <option value="Option1">Option 1</option>
+                            <option value="Option2">Option 2</option>
+                        </select>
+                        <span asp-validation-for="jobTypeDet.JobTypeMilestone" class="text-danger"></span>
+                    </div>
+                </div>
+            </div> *@
+
+            <br />
+
+     @*        <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label asp-for="jobTypeDet.JobTypStatus" class="control-label">Loading Stage</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select asp-for="jobTypeDet.JobTypStatus" class="form-control" disabled>
+                            <option value="Option1">Option 1</option>
+                            <option value="Option2">Option 2</option>
+                        </select>
+                        <span asp-validation-for="jobTypeDet.JobTypStatus" class="text-danger"></span>
+                    </div>
+                </div>
+            </div> *@
+
+
+            @if (Model.ErrMsg.Length == 0)
+            {
+                <table class="table table-bordered table-responsive-md table-striped text-center " id="tblMilestone">
+                    <thead>
+                        <tr id="TbRow">
+
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.jobTypeDet.JobTypeMilestone)
+                            </th>
+
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.jobTypeDet.JobTypStatus)
+                            </th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @for (int i = 0; i < Model.JobTypeDetList.Count; i++)
+                        {
+                            <tr id="tblMilestoneRw">
+
+                                <td class="pt-3-half" hidden>
+                                    @Html.HiddenFor(model => model.JobTypeDetList[i].JobTypePk, new { id = "JobTypeHedID" })
+                                </td>
+
+                                <td class="pt-3-half" hidden>
+                                    @Html.HiddenFor(model => model.JobTypeDetList[i].JobTypeDetPk, new { id = "JobTypeDetId" })
+                                </td>
+
+                                <td class="pt-3-half">
+                                    @Html.DisplayFor(model => model.JobTypeDetList[i].JobTypeMilestone)
+                                </td>
+
+                                <td class="pt-3-half">
+                                    @Html.DisplayFor(model => model.JobTypeDetList[i].JobTypStatus)
+                                </td>
+
+
+
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-info" role="alert">
+                    @Model.ErrMsg
+                </div>
+            }
+
+
+            <br />
+        
+        </form>
+    
+    </div>
+    
+    <form method="post">
+        <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+        <input type="hidden" asp-for="JobTypeHed.JobTypePk" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+                <a asp-page="./Index" class="btn btn-info">Back to List</a>
+            </div>
+        </div>
+    </form>
+</div>
